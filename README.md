@@ -1,6 +1,7 @@
 # Csgraph
 
 [![Join the chat at https://gitter.im/nicb/csgraph](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/nicb/csgraph?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://semaphoreci.com/api/v1/projects/9213f05d-77f4-4f68-8806-b6e1048366c4/493846/badge.svg)](https://semaphoreci.com/nicb/csgraph)      
 [![Code Climate](https://codeclimate.com/github/nicb/csgraph/badges/gpa.svg)](https://codeclimate.com/github/nicb/csgraph)
 [![Test Coverage](https://codeclimate.com/github/nicb/csgraph/badges/coverage.svg)](https://codeclimate.com/github/nicb/csgraph/coverage)
 
