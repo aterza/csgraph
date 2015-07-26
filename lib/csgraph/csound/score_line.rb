@@ -42,7 +42,7 @@ module Csgraph
         def compile(line)
           res = nil
           return res unless line =~ /^\s*[fi]\s*[0-9]*/
-          pars = line.chomp.strip.split(/\s+/)
+          pars = line.chomp.sub(/\s*;.*$/, '').strip.split(/\s+/)
           line_type = pars[0][0]
           if pars[0][1..-1].empty?
             pars.shift
