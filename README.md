@@ -1,6 +1,7 @@
 # Csgraph
 
 [![Join the chat at https://gitter.im/nicb/csgraph](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/nicb/csgraph?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 A small ruby library and executable to create pic scripts suitable to be printed as graphics
 
 ## Installation
@@ -21,7 +22,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+This is a work in progress.
+Currently we're working very hard to make this little lib with at least
+minimally functional.
+Please come back soon for more info.
+If you wish to help, check us out on
+[Gitter!](https://gitter.im/nicb/csgraph?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+You will be most welcome.
 
 ## Development
 
