@@ -1,4 +1,6 @@
 # Csgraph
+
+[![Join the chat at https://gitter.im/nicb/csgraph](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/nicb/csgraph?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 A small ruby library and executable to create pic scripts suitable to be printed as graphics
 
 ## Installation
