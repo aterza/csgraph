@@ -1,11 +1,11 @@
 require "bundler/gem_tasks"
 begin
+	require 'byebug'
   require 'rspec/core/rake_task'
 
-# RSpec::Core::RakeTask.new(:spec, :tag) do |t, task_args|
-#   t.rspec_opts = "--tag #{task_args[:tag]}"
-# end
-  RSpec::Core::RakeTask.new(:spec)
+  RSpec::Core::RakeTask.new(:test)
 rescue LoadError
   # no rspec available
 end
+
+task :default => :test
