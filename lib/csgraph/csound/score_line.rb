@@ -10,8 +10,8 @@ module Csgraph
     # should be used instead. For ex.:
     #
     # <tt>
-    #   iline = ScoreLine.compile('i1 0.25 3.9875 -18.2 408.23 ; this is a comment')
-    #   # => IScoreLine
+    #   iline = Csgraph::Csound::ScoreLine.compile('i1 0.25 3.9875 -18.2 408.23 ; this is a comment')
+    #   # => Csgraph::CsoundIScoreLine
     # </tt>
     #
     class ScoreLine
@@ -22,6 +22,36 @@ module Csgraph
 
       def initialize(p = [])
         @params = p
+      end
+
+      #
+      # +render+
+      #
+      # renders this score line in lines of +pic+ code.
+      #
+      # TODO: set up example code, with or without block
+      #
+      def render
+        res = ''
+        if block_given?
+          res = yield(self.params)
+        else
+          res = default_render
+        end
+        res
+      end
+
+    protected
+
+      #
+      # <tt>default_render</tt>
+      #
+      # is a protected method which is implemented in subclasses. It
+      # promotes a default action when a block is not passed to the +render+
+      # method
+      #
+      def default_render
+        ''
       end
 
     end
