@@ -1,5 +1,3 @@
-require "csgraph/version"
-
 module Csgraph
 	module Csound
 	  PATH = File.expand_path(File.join('..', 'csound'), __FILE__)

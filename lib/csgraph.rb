@@ -7,4 +7,5 @@ end
 %w(
 	version
 	csound
+	dsl
 ).each { |f| require File.join(Csgraph::PATH, f) }

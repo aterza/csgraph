@@ -37,33 +37,33 @@ describe Csgraph::Csound::ScoreLine do
     end
   end
 
-	it 'returns nil if no recognizable line is passed' do
-		sl = ' t 0 23 151 160 ; comment'
-		slk = Csgraph::Csound::ScoreLine.compile(sl)
-		expect(slk).to be(nil)
-	end
+  it 'returns nil if no recognizable line is passed' do
+    sl = ' t 0 23 151 160 ; comment'
+    slk = Csgraph::Csound::ScoreLine.compile(sl)
+    expect(slk).to be(nil)
+  end
 
-	context 'render with a block' do
-		it 'returns whatever string is passed to the block' do
-			result_string = 'test string'
-			slks = []
+  context 'render with a block' do
+    it 'returns whatever string is passed to the block' do
+      result_string = 'test string'
+      slks = []
       @sls.each do
         |lt, sl_hash|
         sl_hash[:input].each { |sl| slks << Csgraph::Csound::ScoreLine.compile(sl) }
       end
-			slks.each { |slk| expect(slk.render { |p| result_string }).to eq(result_string) }
-		end
-	end
+      slks.each { |slk| expect(slk.render { |p| result_string }).to eq(result_string) }
+    end
+  end
 
-	context 'render without a block' do
-		it 'returns a null string' do
-			slks = []
+  context 'render without a block' do
+    it 'returns a null string' do
+      slks = []
       @sls.each do
         |lt, sl_hash|
         sl_hash[:input].each { |sl| slks << Csgraph::Csound::ScoreLine.compile(sl) }
       end
-			slks.each { |slk| expect(slk.render.empty?).to be true }
-		end
-	end
+      slks.each { |slk| expect(slk.render.empty?).to be true }
+    end
+  end
 
 end

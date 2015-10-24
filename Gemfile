@@ -6,5 +6,5 @@ gemspec
 group :test do
   gem 'byebug'
   gem 'rspec'
-	gem "codeclimate-test-reporter", require: nil
+  gem "codeclimate-test-reporter", require: nil
 end
