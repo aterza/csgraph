@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe Csgraph::DSL::Definition do
+describe Csgraph::DSL::Definitions do
 
   it 'cannot be created with new' do
-    expect { Csgraph::DSL::Definition.new }.to raise_error(NoMethodError, "private method `new' called for Csgraph::DSL::Definition:Class")
+    expect { Csgraph::DSL::Definitions.new }.to raise_error(NoMethodError, "private method `new' called for Csgraph::DSL::Definitions:Class")
   end
 
 	it 'should have a singleton class defined called CsGraph' do
-		expect(CsGraph.class).to be(Csgraph::DSL::Definition)
+		expect(CsGraph.class).to be(Csgraph::DSL::Definitions)
 	end
 
 	it 'should have a method called \'define\'' do

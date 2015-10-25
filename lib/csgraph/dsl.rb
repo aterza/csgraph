@@ -5,5 +5,7 @@ module Csgraph
 end
 
 %w(
+	line
 	definition
+	definitions
 ).each { |f| require File.join(Csgraph::DSL::PATH, f) }
