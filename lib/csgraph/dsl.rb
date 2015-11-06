@@ -6,6 +6,6 @@ end
 
 %w(
 	line
-	definition
+	instr
 	definitions
 ).each { |f| require File.join(Csgraph::DSL::PATH, f) }

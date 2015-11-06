@@ -22,17 +22,18 @@ module Csgraph
     # 4"
     #
     #
-    class Definition
+    class Instr
 
-      attr_accessor :instrs, :features
+      attr_reader :instruments, :features
 
 			def initialize(*args, &block)
-				@instr = args
-				@features = block.call
+				@instruments = args
+				@features = []
+				block.call
 			end
 
-			def line(ystart, yend, options = {})
-				Line.new(ystart, yend, options)
+			def line(xstart, xend, ystart, yend, options = {})
+				@features << Line.new(xstart, xend, ystart, yend, options)
 			end
 
     end
