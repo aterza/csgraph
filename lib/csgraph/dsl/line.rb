@@ -6,7 +6,9 @@ module Csgraph
     
 			attr_reader :xstart, :xend, :ystart, :yend, :options
 
-			def initialize(ys, ye, opts = {})
+			def initialize(xs, xe, ys, ye, opts = {})
+				@xstart = xs
+				@xend = xe
 				@ystart = ys
 				@yend = ye
 				@options = opts

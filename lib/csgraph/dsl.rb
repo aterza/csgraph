@@ -7,6 +7,7 @@ end
 %w(
   exceptions
   p_field
+	p_field_expression
   line
   instr
   definitions

@@ -1,0 +1,14 @@
+#
+# this is (almost) the simplest possible csg file
+#
+# It defines the reading mechanism for instr 1-4
+# to read score lines in order to draw straight lines
+#
+
+CsGraph.define do
+
+  instr 1, 2, 3, 4 do
+    line p2, p2+p3, p5, p5  # x0 = p2, x1 = p2+p3, y0 = p5, y1 = p5
+  end
+
+end

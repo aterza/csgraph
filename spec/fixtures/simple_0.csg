@@ -7,8 +7,8 @@
 
 CsGraph.define do
 
-	instr 1 do
-		line p2, p2+p3, p5, p5  # x0 = p2, x1 = p2+p3, y0 = p5, y1 = p5
-	end
+  instr 1 do
+    line p2, p2+p3, p5, p5  # x0 = p2, x1 = p2+p3, y0 = p5, y1 = p5
+  end
 
 end

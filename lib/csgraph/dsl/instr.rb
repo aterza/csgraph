@@ -15,7 +15,7 @@ module Csgraph
     #  
     #      instr 1,2,3 do
     #
-    #       line p2, p2+p3, p5, p5, :thickness => 4
+    #       line p2, p2+p3, p5, p5, :thickness => p4
     #
     #      end
     #
@@ -33,13 +33,23 @@ module Csgraph
       def initialize(n, &block)
         @instrno = n
         @features = []
-        block.call
+        instance_eval(&block)
       end
 
       def line(xstart, xend, ystart, yend, options = {})
         @features << Line.new(xstart, xend, ystart, yend, options)
       end
 
+      #
+      # <tt>method_missing(methId)</tt>
+      #
+      def method_missing(methId)
+        str = methId.id2name
+        raise ArgumentError, "Argument can only be a mumeric constant or a p-field (got \"#{str}\" instead)" unless str != /\A[Pp]\s*[0-9]*/
+        num = str.sub(/\A[Pp]/, '').to_i
+        PField.new(num)
+      end
+        
     end
 
   end

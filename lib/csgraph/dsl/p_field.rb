@@ -13,14 +13,24 @@ module Csgraph
         @number = n
       end
 
-			class << self
+			#
+			# TODO
+			# +eval+
+			#
 
-				def create(arg)
-					num = arg.to_s.sub(/\A[Pp]/, '').to_i
-					new(num)
-				end
+      class << self
 
-			end
+        def create(arg)
+          num = arg.to_s.sub(/\A[Pp]/, '').to_i
+          new(num)
+        end
+
+      end
+
+      def +(other_pfield)
+        raise Exceptions::SyntaxError, "wrong operator type #{other_pfield.class.name}" unless other_pfield.is_a?(self.class)
+				PFieldExpression.new(self, other_pfield, :+)
+      end
 
     end
 

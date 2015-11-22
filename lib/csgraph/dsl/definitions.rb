@@ -20,7 +20,7 @@ module Csgraph
     #  
     #      instr 1,2,3 do
     #
-    #       line p2, p2+p3, p5, p5, :thickness => 4
+    #       line p2, p2+p3, p5, p5, :thickness => p4
     #
     #      end
     #
@@ -41,9 +41,7 @@ module Csgraph
       private_class_method :new
 
       def define(&block)
-        #
-        # this is an empty function which encloses all instrument definitions
-        #
+				instance_eval(&block)
       end
       
       #
@@ -57,19 +55,10 @@ module Csgraph
         args.each do
           |n|
           i = Instr.new(n, &block)
-          self.update(i.number.to_s => i)
+          self.update(i.instrno.to_s => i)
         end
       end
 
-      #
-      # <tt>method_missing(method)</tt>
-      #
-      def method_missing(methId)
-        str = methId.id2name
-byebug
-nop = 0
-      end
-        
     end
     
 
