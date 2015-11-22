@@ -11,9 +11,13 @@ module Csgraph
     #
     # An example of a very basic definition is
     #
-    #    CsGraph.define 1,2,3 do
+    #    CsGraph.define do
     #  
-    #      line 5, 5, :thickness => 4
+    #      instr 1,2,3 do
+    #
+    #       line p2, p2+p3, p5, p5, :thickness => 4
+    #
+    #      end
     #
     #    end
     #
@@ -24,17 +28,17 @@ module Csgraph
     #
     class Instr
 
-      attr_reader :instruments, :features
+      attr_reader :instrno, :features
 
-			def initialize(*args, &block)
-				@instruments = args
-				@features = []
-				block.call
-			end
+      def initialize(n, &block)
+        @instrno = n
+        @features = []
+        block.call
+      end
 
-			def line(xstart, xend, ystart, yend, options = {})
-				@features << Line.new(xstart, xend, ystart, yend, options)
-			end
+      def line(xstart, xend, ystart, yend, options = {})
+        @features << Line.new(xstart, xend, ystart, yend, options)
+      end
 
     end
 

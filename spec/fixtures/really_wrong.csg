@@ -1,0 +1,6 @@
+#
+# This is a file which does not observe the DSL syntax to see how error
+# recovery works.
+#
+
+this is really wrong and has nothing to do with CsGraph's DSL.

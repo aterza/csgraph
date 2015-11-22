@@ -1,11 +1,14 @@
 module Csgraph
-	module DSL
-	  PATH = File.expand_path(File.join('..', 'dsl'), __FILE__)
-	end
+  module DSL
+    PATH = File.expand_path(File.join('..', 'dsl'), __FILE__)
+  end
 end
 
 %w(
-	line
-	instr
-	definitions
+  exceptions
+  p_field
+  line
+  instr
+  definitions
+  reader
 ).each { |f| require File.join(Csgraph::DSL::PATH, f) }
