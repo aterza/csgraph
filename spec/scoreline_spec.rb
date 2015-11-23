@@ -5,8 +5,8 @@ describe Csgraph::Csound::ScoreLine do
   before(:example) do
     @sls =
     {
-      'i' => { :input => ['i1 0.25 0.5 -18 235.25', '  i 1 0.25 0.5 -18 235.25 ; comment' ], :output => %w(1 0.25 0.5 -18 235.25) },
-      'f' => { :input => [ 'f3 0 4096 10 1 0.5', '  f 3 0 4096 10 1 0.5 ; comment'], :output => %w(3 0 4096 10 1 0.5) },
+      'i' => { :input => ['i1 0.25 0.5 -18 235.25', '  i 1 0.25 0.5 -18 235.25 ; comment' ], :output => [1, 0.25, 0.5, -18, 235.25] },
+      'f' => { :input => [ 'f3 0 4096 10 1 0.5', '  f 3 0 4096 10 1 0.5 ; comment'], :output => [3, 0, 4096, 10, 1, 0.5] },
     }
   end
 
@@ -49,7 +49,7 @@ describe Csgraph::Csound::ScoreLine do
 		  il = @sls['i'][:input].first
 		  expect((isl = Csgraph::Csound::ScoreLine.compile(il)).class).to be(Csgraph::Csound::IScoreLine)
 			expect(isl.respond_to?(:instr)).to eq(true)
-			expect(isl.instr).to eq('1')
+			expect(isl.instr).to eq(1)
 		end
 
 	end

@@ -42,9 +42,9 @@ module Csgraph
         ostream
       end
 
-			def instr
-				self.params.first
-			end
+      def instr
+        self.params.first
+      end
 
     end
 
@@ -80,6 +80,7 @@ module Csgraph
           else
             pars[0] = pars[0][1..-1]
           end
+          pars = pars.map { |p| p = p.to_f }
           klass = Object.const_get('Csgraph::Csound::' + line_type.upcase + 'ScoreLine')
           klass.send(:new, pars)
         end
