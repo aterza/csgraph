@@ -23,7 +23,7 @@ module Csgraph
     private
 
       def check_argument(operand)
-        raise Exceptions::SyntaxError, "operand #{operand.class.name} is not a p-field" unless operand.is_a?(PField) || operand.is_a?(PFieldExpression)
+        raise Exceptions::SyntaxError, "operand #{operand.class.name} is not a p-field" unless operand.is_a?(PField) || operand.is_a?(PFieldExpression) || operand.is_a?(Numeric)
         operand
       end
 

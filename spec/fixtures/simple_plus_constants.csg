@@ -1,0 +1,15 @@
+#
+# this is a simple file which add constants to some p-fields
+#
+# It defines the reading mechanism for instr 1-4
+# to read score lines in order to draw straight lines
+# from y0 to y1
+#
+
+CsGraph.define do
+
+  instr 1, 10 do
+    line p2, p2+p3, 1000.2323 + p5, p5 + 990
+  end
+
+end

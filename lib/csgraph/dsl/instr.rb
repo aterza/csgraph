@@ -45,9 +45,8 @@ module Csgraph
       #
       def method_missing(methId)
         str = methId.id2name
-        raise ArgumentError, "Argument can only be a mumeric constant or a p-field (got \"#{str}\" instead)" unless str != /\A[Pp]\s*[0-9]*/
-        num = str.sub(/\A[Pp]/, '').to_i
-        PField.new(num)
+        raise ArgumentError, "Argument can only be a p-field (got \"#{str}\" instead)" unless str =~ /\A[Pp]\s*[0-9]*/
+        PField.create(methId)
       end
         
     end
