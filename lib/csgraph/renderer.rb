@@ -17,16 +17,17 @@ module Csgraph
       @score_lines = []
       @score_filename = sfn
       @csg_filename = csg
-			@output_stream = os
+      @output_stream = os
     end
 
     def render
       clear unless self.score_lines.empty?
       read
-      #
-      # TODO: the actual rendering!
-      #
-			self.output_stream
+			self.score_lines.each do
+				|sl|
+				sl.render(self.output_stream)
+			end
+      self.output_stream
     end
 
   private
@@ -36,10 +37,10 @@ module Csgraph
     def read
       read_csg_file
       read_score_file
-			#
-			# return the number of lines read and parsed
-			#
-			self.score_lines.size
+      #
+      # return the number of lines read and parsed
+      #
+      self.score_lines.size
     end
 
     def clear

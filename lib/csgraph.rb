@@ -5,6 +5,7 @@ module Csgraph
 end
 
 %w(
+	exceptions
 	version
 	csound
 	dsl

@@ -25,40 +25,39 @@ module Csgraph
       end
 
       #
-      # +render+
+      # +render(ostream)+
       #
-      # renders this score line in lines of +pic+ code.
+      # This is an pure virtual method which should raise an exception when called
       #
-      # TODO: set up example code, with or without block
-      #
-      def render
-        res = ''
-        if block_given?
-          res = yield(self.params)
-        else
-          res = default_render
-        end
-        res
-      end
-
-    protected
-
-      #
-      # <tt>default_render</tt>
-      #
-      # is a protected method which is implemented in subclasses. It
-      # promotes a default action when a block is not passed to the +render+
-      # method
-      #
-      def default_render
-        ''
+      def render(ostream)
+        raise Csgraph::Exceptions::PureVirtualMethod, "render() is a pure virtual method in class #{self.class.name}"
       end
 
     end
 
-    class IScoreLine < ScoreLine; end
+    class IScoreLine < ScoreLine
 
-    class FScoreLine < ScoreLine; end
+      def render(ostream)
+        CsGraph.render(self, ostream)
+        ostream
+      end
+
+			def instr
+				self.params.first
+			end
+
+    end
+
+    class FScoreLine < ScoreLine
+
+      def render(ostream)
+        #
+        # currently f score lines do nothing while rendering
+        #
+        ostream
+      end
+
+    end
 
     class ScoreLine
 
@@ -69,7 +68,7 @@ module Csgraph
         #
         # will compile any *score* line coming from a csound score
         #
-				SCORE_LINE_REGEXP = /\A\s*[fi]\s*[0-9]/
+        SCORE_LINE_REGEXP = /\A\s*[fi]\s*[0-9]/
 
         def compile(line)
           res = nil

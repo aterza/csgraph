@@ -43,27 +43,15 @@ describe Csgraph::Csound::ScoreLine do
     expect(slk).to be(nil)
   end
 
-  context 'render with a block' do
-    it 'returns whatever string is passed to the block' do
-      result_string = 'test string'
-      slks = []
-      @sls.each do
-        |lt, sl_hash|
-        sl_hash[:input].each { |sl| slks << Csgraph::Csound::ScoreLine.compile(sl) }
-      end
-      slks.each { |slk| expect(slk.render { |p| result_string }).to eq(result_string) }
-    end
-  end
+	context 'instrument score line' do
 
-  context 'render without a block' do
-    it 'returns a null string' do
-      slks = []
-      @sls.each do
-        |lt, sl_hash|
-        sl_hash[:input].each { |sl| slks << Csgraph::Csound::ScoreLine.compile(sl) }
-      end
-      slks.each { |slk| expect(slk.render.empty?).to be true }
-    end
-  end
+		it 'can discern its own instrument number' do
+		  il = @sls['i'][:input].first
+		  expect((isl = Csgraph::Csound::ScoreLine.compile(il)).class).to be(Csgraph::Csound::IScoreLine)
+			expect(isl.respond_to?(:instr)).to eq(true)
+			expect(isl.instr).to eq('1')
+		end
+
+	end
 
 end

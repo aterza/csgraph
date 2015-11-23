@@ -36,6 +36,17 @@ module Csgraph
         instance_eval(&block)
       end
 
+			#
+			# <tt>render(score_line, output_stream)</tt>
+			#
+			# +render+ passes the score_line onto each +feature+ to do the final
+			# rendering
+			#
+			def render(sl, os)
+				self.features.each { |f| f.render(sl, os) }
+				os
+			end
+
       def line(xstart, xend, ystart, yend, options = {})
         @features << Line.new(xstart, xend, ystart, yend, options)
       end

@@ -59,6 +59,24 @@ module Csgraph
         end
       end
 
+			#
+			# <tt>render(score_line, output_stream)</tt>
+			#
+			# This is where the whole sha-bang takes place.
+			# <tt>CsGraph.render</tt> will pick up a given +ScoreLine+ object,
+			# identify the relevant +instr+ info coming from the +.csg+
+			# configuration and actually pass the line to that object
+			#
+			def render(sl, os)
+				#
+				# we do render only +i+-score lines at the moment
+				#
+				if sl.is_a?(Csgraph::Csound::IScoreLine)
+					i = self[sl.instr]
+					i.render(sl, os)
+				end
+			end
+
     end
     
 
