@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Csgraph::DSL::Definitions do
 
+	include Csgraph::DSL::Reader
+
   it 'cannot be created with new' do
     expect { Csgraph::DSL::Definitions.new }.to raise_error(NoMethodError, "private method `new' called for Csgraph::DSL::Definitions:Class")
   end
@@ -15,23 +17,23 @@ describe Csgraph::DSL::Definitions do
   end
 
   it 'should be able to read files through csg_require (*without* .csg)' do
-    path = File.join(SPEC_FIXTURE_PATH, 'simple_0')
-    expect(Csgraph::DSL::Reader.csg_require(path)).to be(true)
+    path = File.join(SPEC_CSG_FIXTURE_PATH, 'simple_0')
+    expect(csg_require(path)).to be(true)
   end
   
   it 'should be able to read files through csg_require (*with* .csg)' do
-    path = File.join(SPEC_FIXTURE_PATH, 'simple_0.csg')
-    expect(Csgraph::DSL::Reader.csg_require(path)).to be(true)
+    path = File.join(SPEC_CSG_FIXTURE_PATH, 'simple_0.csg')
+    expect(csg_require(path)).to be(true)
   end
 
   it 'can handle DSL syntax errors' do
-    path = File.join(SPEC_FIXTURE_PATH, 'really_wrong')
-    expect { Csgraph::DSL::Reader.csg_require(path) }.to raise_error(Csgraph::DSL::Exceptions::SyntaxError) # the actual message can only be matched
+    path = File.join(SPEC_CSG_FIXTURE_PATH, 'really_wrong')
+    expect { csg_require(path) }.to raise_error(Csgraph::DSL::Exceptions::SyntaxError) # the actual message can only be matched
   end
   
   it 'should be able to parse DSL-correct files' do
-    path = File.join(SPEC_FIXTURE_PATH, 'simple_1')
-    expect(Csgraph::DSL::Reader.csg_require(path)).to be(true)
+    path = File.join(SPEC_CSG_FIXTURE_PATH, 'simple_1')
+    expect(csg_require(path)).to be(true)
     #
     # now let's check if the parsing is correct
     #
@@ -65,8 +67,8 @@ describe Csgraph::DSL::Definitions do
   # end
   #
   it 'should be able to parse DSL-correct files adding constants' do
-    path = File.join(SPEC_FIXTURE_PATH, 'simple_plus_constants')
-    expect(Csgraph::DSL::Reader.csg_require(path)).to be(true)
+    path = File.join(SPEC_CSG_FIXTURE_PATH, 'simple_plus_constants')
+    expect(csg_require(path)).to be(true)
     #
     # now let's check if the parsing is correct
     #
@@ -108,8 +110,8 @@ describe Csgraph::DSL::Definitions do
   # end
   #
   it 'should be able to parse DSL-correct files subtracting constants' do
-    path = File.join(SPEC_FIXTURE_PATH, 'simple_minus_constants')
-    expect(Csgraph::DSL::Reader.csg_require(path)).to be(true)
+    path = File.join(SPEC_CSG_FIXTURE_PATH, 'simple_minus_constants')
+    expect(csg_require(path)).to be(true)
     #
     # now let's check if the parsing is correct
     #

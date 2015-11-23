@@ -8,4 +8,5 @@ end
 	version
 	csound
 	dsl
+	renderer
 ).each { |f| require File.join(Csgraph::PATH, f) }

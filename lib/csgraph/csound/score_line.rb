@@ -67,11 +67,13 @@ module Csgraph
         #
         # <tt>compile(line)</tt>
         #
-        # will compile any line coming from a csound score
+        # will compile any *score* line coming from a csound score
         #
+				SCORE_LINE_REGEXP = /\A\s*[fi]\s*[0-9]/
+
         def compile(line)
           res = nil
-          return res unless line =~ /^\s*[fi]\s*[0-9]*/
+          return res unless line =~ SCORE_LINE_REGEXP
           pars = line.chomp.sub(/\s*;.*$/, '').strip.split(/\s+/)
           line_type = pars[0][0]
           if pars[0][1..-1].empty?
