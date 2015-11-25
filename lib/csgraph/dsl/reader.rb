@@ -14,12 +14,12 @@ module Csgraph
       #
       def csg_require(filename)
         filename += '.csg' unless filename =~ /\.csg\Z/
-					begin
-						CsGraph.clear # clear whatever was coming from the previous load (this might be *WRONG*)
+          begin
+            CsGraph.clear # clear whatever was coming from the previous load (this might be *WRONG*)
           load(filename)
-					rescue SyntaxError => e
-						raise Csgraph::DSL::Exceptions::SyntaxError, "CsGraph::DSL Syntax Error: " + e.message
-					end
+          rescue SyntaxError => e
+            raise Csgraph::DSL::Exceptions::SyntaxError, "CsGraph::DSL Syntax Error: " + e.message
+          end
       end
 
     end

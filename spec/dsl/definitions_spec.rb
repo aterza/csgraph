@@ -16,16 +16,6 @@ describe Csgraph::DSL::Definitions do
     expect(CsGraph.respond_to?(:define)).to be(true)
   end
 
-  it 'should be able to read files through csg_require (*without* .csg)' do
-    path = File.join(SPEC_CSG_FIXTURE_PATH, 'simple_0')
-    expect(csg_require(path)).to be(true)
-  end
-  
-  it 'should be able to read files through csg_require (*with* .csg)' do
-    path = File.join(SPEC_CSG_FIXTURE_PATH, 'simple_0.csg')
-    expect(csg_require(path)).to be(true)
-  end
-
   it 'can handle DSL syntax errors' do
     path = File.join(SPEC_CSG_FIXTURE_PATH, 'really_wrong')
     expect { csg_require(path) }.to raise_error(Csgraph::DSL::Exceptions::SyntaxError) # the actual message can only be matched
