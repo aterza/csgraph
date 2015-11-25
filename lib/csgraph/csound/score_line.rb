@@ -29,7 +29,7 @@ module Csgraph
       #
       # +render(ostream)+
       #
-      # This is an pure virtual method which should raise an exception when called
+      # This is a pure virtual method which should raise an exception when called
       #
       def render(ostream)
         raise Csgraph::Exceptions::PureVirtualMethod, "render() is a pure virtual method in class #{self.class.name}"

@@ -1,6 +1,8 @@
 require "csgraph/version"
 
+ 
 module Csgraph
+
 	PATH = File.expand_path(File.join('..', 'csgraph'), __FILE__)
 end
 
