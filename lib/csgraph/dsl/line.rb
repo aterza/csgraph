@@ -26,7 +26,8 @@ module Csgraph
         xend_val = self.xend.value(sl)
         ystart_val = self.ystart.value(sl)
         yend_val = self.yend.value(sl)
-
+				#
+				# TODO: handle options
 				#
 				# and finally we render
 				#

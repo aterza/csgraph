@@ -19,9 +19,11 @@ module Csgraph
       private_class_method :new
 
       attr_accessor :params
+			attr_reader   :line
 
-      def initialize(p = [])
+      def initialize(l, p = [])
         @params = p
+				@line = l
       end
 
       #
@@ -73,7 +75,7 @@ module Csgraph
         def compile(line)
           res = nil
           return res unless line =~ SCORE_LINE_REGEXP
-          pars = line.chomp.sub(/\s*;.*$/, '').strip.split(/\s+/)
+          pars = line.chomp.sub(/\s*;.*\Z/, '').strip.split(/\s+/)
           line_type = pars[0][0]
           if pars[0][1..-1].empty?
             pars.shift
@@ -82,7 +84,7 @@ module Csgraph
           end
           pars = pars.map { |p| p = p.to_f }
           klass = Object.const_get('Csgraph::Csound::' + line_type.upcase + 'ScoreLine')
-          klass.send(:new, pars)
+          klass.send(:new, line, pars)
         end
 
       end
