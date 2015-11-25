@@ -2,4 +2,4 @@ languages:
    Ruby: true
    JavaScript: true
 # exclude_paths:
-# - "test/*"
+- 'spec/*'
