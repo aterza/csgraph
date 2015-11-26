@@ -12,7 +12,7 @@ end
 
 desc 'build the rdoc documentation'
 task :doc do
-    puts %x'rdoc --main rdoc/rdoc.rb --exclude spec' 
+    puts %x'rdoc --main=README.md --exclude spec' 
 end
 
 task :default => :test
