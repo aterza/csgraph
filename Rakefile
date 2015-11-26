@@ -1,4 +1,5 @@
 require "bundler/gem_tasks"
+require 'rdoc/task'
 
 begin
   require 'byebug'
@@ -7,6 +8,11 @@ begin
   RSpec::Core::RakeTask.new(:test)
 rescue LoadError
   # no rspec available
+end
+
+desc 'build the rdoc documentation'
+task :doc do
+    puts %x'rdoc --main ./lib/csgraph.rb --exclude tests.rb'
 end
 
 task :default => :test
