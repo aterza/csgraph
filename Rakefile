@@ -12,7 +12,7 @@ end
 
 desc 'build the rdoc documentation'
 task :doc do
-    puts %x'rdoc --main ./lib/csgraph.rb --exclude tests.rb'
+    puts %x'rdoc --main ./lib/csgraph.rb --exclude spec' 
 end
 
 task :default => :test
