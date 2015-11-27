@@ -11,13 +11,9 @@ module Csgraph
     #
     # An example of a very basic definition is
     #
-    #    CsGraph.define do
-    #  
-    #      instr 1,2,3 do
+    #    instr 1,2,3 do
     #
-    #       line p2, p2+p3, p5, p5, :thickness => p4
-    #
-    #      end
+    #      line p2, p2+p3, p5, p5, :thickness => p4
     #
     #    end
     #
@@ -36,16 +32,16 @@ module Csgraph
         instance_eval(&block)
       end
 
-			#
-			# <tt>render(score_line, output_stream)</tt>
-			#
-			# +render+ passes the score_line onto each +feature+ to do the final
-			# rendering
-			#
-			def render(sl, os)
-				self.features.each { |f| f.render(sl, os) }
-				os
-			end
+      #
+      # <tt>render(score_line, output_stream)</tt>
+      #
+      # +render+ passes the score_line onto each +feature+ to do the final
+      # rendering
+      #
+      def render(sl, os)
+        self.features.each { |f| f.render(sl, os) }
+        os
+      end
 
       def line(xstart, xend, ystart, yend, options = {})
         @features << Line.new(xstart, xend, ystart, yend, options)

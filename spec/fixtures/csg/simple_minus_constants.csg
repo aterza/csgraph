@@ -6,11 +6,6 @@
 # from y0 to y1
 #
 
-CsGraph.define do
-
-  instr 1, 10 do
-    line p2, p2+p3, 1000.2323 - p5, p5 - 990
-  end
-
+instr 1, 10 do
+  line p2, p2+p3, 1000.2323 - p5, p5 - 990
 end
-

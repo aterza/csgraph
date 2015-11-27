@@ -44,8 +44,9 @@ describe Csgraph::Csound::ScoreLine do
   end
 
   it '\'s render method cannot be called because it it a pure virtual' do
+		csg_defs = Csgraph::DSL::Definitions.new
 		sl = Csgraph::Csound::ScoreLine.send(:new, 'whatever') # new is private
-    expect { sl.render(StringIO.new) }.to raise_error(Csgraph::Exceptions::PureVirtualMethod)
+    expect { sl.render(csg_defs, StringIO.new) }.to raise_error(Csgraph::Exceptions::PureVirtualMethod)
   end
 
 	context 'instrument score line' do

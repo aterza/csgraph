@@ -10,40 +10,34 @@ module Csgraph
     # It is a collection of definitions, one for each [group of]
     # instrument[s].
     #
-    # Technically, it is a singleton class. It cannot be created, and there is
-    # only +one+ instance called +CsGraph+ available. This allows constructs
-    # like
-    #
     # An example of a very basic definition is
     #
-    #    CsGraph.define do
-    #  
-    #      instr 1,2,3 do
+    #   instr 1,2,3 do
     #
-    #       line p2, p2+p3, p5, p5, :thickness => p4
+    #     line p2, p2+p3, p5, p5, :thickness => p4
     #
-    #      end
-    #
-    #    end
+    #   end
     #
     # which means "for instr 1,2,3 draw lines taking pfield 5 as y start point, pfield 5
     # as y end point, and adjusting the thickness of the line to pfield 4"
     #
+    # There can be as many +instr+ definitions and as many inner definitions
+    # as you wish.
+    #
     # These definitions can all be loaded into a +.csg+ file which can then be
     # passed to the +csgraph+ executable.
     #
-    # +Instr+s requires a variable number of arguments which are all pfield
+    # +line+s requires a variable number of arguments which are all pfield
     # variables. We use the +method_missing+ method in order to construct
     # variables as they appear as arguments.
     #
     class Definitions < Hash
 
-      private_class_method :new
-
-      def define(&block)
-				instance_eval(&block)
+      def csg_require(filename_path)
+        clear
+				csg_string = read(filename_path)
+				self.instance_eval(csg_string)
       end
-      
       #
       # <tt>instr(*args, &block)</tt>
       #
@@ -59,23 +53,34 @@ module Csgraph
         end
       end
 
-			#
-			# <tt>render(score_line, output_stream)</tt>
-			#
-			# This is where the whole sha-bang takes place.
-			# <tt>CsGraph.render</tt> will pick up a given +ScoreLine+ object,
-			# identify the relevant +instr+ info coming from the +.csg+
-			# configuration and actually pass the line to that object
-			#
-			def render(sl, os)
-				#
-				# we do render only +i+-score lines at the moment
-				#
-				if sl.is_a?(Csgraph::Csound::IScoreLine)
-					i = self[sl.instr.to_s]
-					i.render(sl, os) if i
-				end
-			end
+      #
+      # <tt>render(score_line, output_stream)</tt>
+      #
+      # This is where the whole sha-bang takes place.
+      # +render+ will pick up a given +ScoreLine+ object,
+      # identify the relevant +instr+ info coming from the +.csg+
+      # configuration and actually pass the line to that object
+      #
+      def render(sl, os)
+        #
+        # we do render only +i+-score lines at the moment
+        #
+        if sl.is_a?(Csgraph::Csound::IScoreLine)
+          i = self[sl.instr.to_s]
+          i.render(sl, os) if i
+        end
+      end
+
+    private
+
+      def read(f)
+        res = ''
+        File.open(f, 'r') do
+          |fh|
+          res = fh.readlines.join
+        end
+        res
+      end
 
     end
     
@@ -83,8 +88,3 @@ module Csgraph
   end
 
 end
-
-#
-# +CsGraph+ is the singleton container
-#
-CsGraph = Csgraph::DSL::Definitions.send(:new)

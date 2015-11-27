@@ -4,18 +4,6 @@ describe Csgraph::DSL::Definitions do
 
 	include Csgraph::DSL::Reader
 
-  it 'cannot be created with new' do
-    expect { Csgraph::DSL::Definitions.new }.to raise_error(NoMethodError, "private method `new' called for Csgraph::DSL::Definitions:Class")
-  end
-
-  it 'should have a singleton class defined called CsGraph' do
-    expect(CsGraph.class).to be(Csgraph::DSL::Definitions)
-  end
-
-  it 'should have a method called \'define\'' do
-    expect(CsGraph.respond_to?(:define)).to be(true)
-  end
-
   it 'can handle DSL syntax errors' do
     path = File.join(SPEC_CSG_FIXTURE_PATH, 'really_wrong')
     expect { csg_require(path) }.to raise_error(Csgraph::DSL::Exceptions::SyntaxError) # the actual message can only be matched
@@ -23,13 +11,13 @@ describe Csgraph::DSL::Definitions do
   
   it 'should be able to parse DSL-correct files' do
     path = File.join(SPEC_CSG_FIXTURE_PATH, 'simple_1')
-    expect(csg_require(path)).to be(true)
+    expect((csg_defs = csg_require(path)).class).to be(Csgraph::DSL::Definitions)
     #
     # now let's check if the parsing is correct
     #
-    expect(CsGraph.keys.size).to eq(4)
-    expect(CsGraph.keys).to eq(['1', '2', '3', '4'])
-    CsGraph.each do
+    expect(csg_defs.keys.size).to eq(4)
+    expect(csg_defs.keys).to eq(['1', '2', '3', '4'])
+    csg_defs.each do
       |key, content|
       expect(content.class).to be(Csgraph::DSL::Instr)
       expect(content.features.size).to eq(1)
@@ -48,23 +36,19 @@ describe Csgraph::DSL::Definitions do
   #
   # The following spec tests the following csg:
   #
-  # CsGraph.define do
-  # 
   #   instr 1, 10 do
   #     line p2, p2+p3, 1000.2323 + p5, p5 + 990
   #   end
-  # 
-  # end
   #
   it 'should be able to parse DSL-correct files adding constants' do
     path = File.join(SPEC_CSG_FIXTURE_PATH, 'simple_plus_constants')
-    expect(csg_require(path)).to be(true)
+    expect((csg_defs = csg_require(path)).class).to be(Csgraph::DSL::Definitions)
     #
     # now let's check if the parsing is correct
     #
-    expect(CsGraph.keys.size).to eq(2)
-    expect(CsGraph.keys).to eq(['1', '10']) # keys are instruments
-    CsGraph.each do
+    expect(csg_defs.keys.size).to eq(2)
+    expect(csg_defs.keys).to eq(['1', '10']) # keys are instruments
+    csg_defs.each do
       |key, content|
       expect(content.class).to be(Csgraph::DSL::Instr)
       expect(content.features.size).to eq(1)
@@ -91,23 +75,19 @@ describe Csgraph::DSL::Definitions do
   #
   # The following spec tests the following csg:
   #
-  # CsGraph.define do
-  # 
   #   instr 1, 10 do
   #     line p2, p2+p3, 1000.2323 - p5, p5 - 990
   #   end
-  # 
-  # end
   #
   it 'should be able to parse DSL-correct files subtracting constants' do
     path = File.join(SPEC_CSG_FIXTURE_PATH, 'simple_minus_constants')
-    expect(csg_require(path)).to be(true)
+    expect((csg_defs = csg_require(path)).class).to be(Csgraph::DSL::Definitions)
     #
     # now let's check if the parsing is correct
     #
-    expect(CsGraph.keys.size).to eq(2)
-    expect(CsGraph.keys).to eq(['1', '10']) # keys are instruments
-    CsGraph.each do
+    expect(csg_defs.keys.size).to eq(2)
+    expect(csg_defs.keys).to eq(['1', '10']) # keys are instruments
+    csg_defs.each do
       |key, content|
       expect(content.class).to be(Csgraph::DSL::Instr)
       expect(content.features.size).to eq(1)
