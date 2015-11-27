@@ -41,8 +41,6 @@ module Csgraph
           res = operand
         elsif operand.is_a?(PField)
           res = sl.params[operand.number-1] # csound parameters are 1-offset but we save them as 0-offset
-        else
-          raise Exceptions::SyntaxError, "cannot handle operand #{operand.class.name}"
         end
         res
       end

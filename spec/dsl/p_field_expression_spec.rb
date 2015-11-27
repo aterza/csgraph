@@ -18,8 +18,8 @@ describe Csgraph::DSL::PFieldExpression do
 
   it 'should check on the validity of its inputs' do
     expect((pfield = Csgraph::DSL::PField.create('p2')).class).to be(Csgraph::DSL::PField)
-    expect { Csgraph::DSL::PFieldExpression.new('xxx', pfield, :+) }.to raise_error(Csgraph::DSL::Exceptions::SyntaxError)
-    expect { Csgraph::DSL::PFieldExpression.new(pfield, 'xxx', :+) }.to raise_error(Csgraph::DSL::Exceptions::SyntaxError)
+    expect { Csgraph::DSL::PFieldExpression.new('xxx', pfield, :_plus_) }.to raise_error(Csgraph::DSL::Exceptions::SyntaxError)
+    expect { Csgraph::DSL::PFieldExpression.new(pfield, 'xxx', :_plus_) }.to raise_error(Csgraph::DSL::Exceptions::SyntaxError)
   end
 
   it 'should be able to add a pfield to a constant' do
