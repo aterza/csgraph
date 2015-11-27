@@ -18,4 +18,15 @@ describe Csgraph::Renderer do
 		expect((out = r.render)).to be(output_io)
   end
 
+  it 'should be able to clear its internal score_line buffer' do
+    csound_path = File.join(SPEC_CSOUND_FIXTURE_PATH, 'simple.csd')
+    csg_path = File.join(SPEC_CSG_FIXTURE_PATH, 'simple_0')
+		output_io = StringIO.new
+    expect((r = Csgraph::Renderer.new(csound_path, csg_path, output_io)).class).to be(Csgraph::Renderer)
+		expect((out = r.render)).to be(output_io)
+		expect(r.score_lines.size).to be > 0
+		r.send(:clear) # clear is a private method
+		expect(r.score_lines.empty?).to be(true)
+  end
+
 end

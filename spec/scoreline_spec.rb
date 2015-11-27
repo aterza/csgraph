@@ -11,7 +11,7 @@ describe Csgraph::Csound::ScoreLine do
   end
 
   it 'cannot be created with new' do
-    expect { Csgraph::Csound::ScoreLine.new }.to raise_error(NoMethodError, "private method `new' called for Csgraph::Csound::ScoreLine:Class")
+    expect { Csgraph::Csound::ScoreLine.new('whatever') }.to raise_error(NoMethodError, "private method `new' called for Csgraph::Csound::ScoreLine:Class")
   end
 
   it 'is created with the compile method, selecting the appropriate child' do
@@ -41,6 +41,11 @@ describe Csgraph::Csound::ScoreLine do
     sl = ' t 0 23 151 160 ; comment'
     slk = Csgraph::Csound::ScoreLine.compile(sl)
     expect(slk).to be(nil)
+  end
+
+  it '\'s render method cannot be called because it it a pure virtual' do
+		sl = Csgraph::Csound::ScoreLine.send(:new, 'whatever') # new is private
+    expect { sl.render(StringIO.new) }.to raise_error(Csgraph::Exceptions::PureVirtualMethod)
   end
 
 	context 'instrument score line' do
