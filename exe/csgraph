@@ -1,3 +1,7 @@
 #!/usr/bin/env ruby
 
-require "csgraph"
+$: << File.expand_path(File.join(['..'] * 2, 'lib'), __FILE__)
+
+require 'csgraph'
+
+Csgraph::CLI.execute(ARGV)

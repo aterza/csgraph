@@ -35,6 +35,10 @@ module Csgraph
         raise Csgraph::Exceptions::PureVirtualMethod, "render() is a pure virtual method in class #{self.class.name}"
       end
 
+			def at
+				self.params[1]
+			end
+
     end
 
     class IScoreLine < ScoreLine
@@ -57,6 +61,10 @@ module Csgraph
         # currently f score lines do nothing while rendering
         #
         ostream
+      end
+
+      def fun
+        self.params.first
       end
 
     end

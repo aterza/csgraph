@@ -60,4 +60,15 @@ describe Csgraph::Csound::ScoreLine do
 
 	end
 
+	context 'function score line' do
+
+		it 'can discern its own function number' do
+		  fl = @sls['f'][:input].first
+		  expect((fsl = Csgraph::Csound::ScoreLine.compile(fl)).class).to be(Csgraph::Csound::FScoreLine)
+			expect(fsl.respond_to?(:fun)).to eq(true)
+			expect(fsl.fun).to eq(3)
+		end
+
+	end
+
 end

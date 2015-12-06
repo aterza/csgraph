@@ -66,7 +66,7 @@ module Csgraph
         # we do render only +i+-score lines at the moment
         #
         if sl.is_a?(Csgraph::Csound::IScoreLine)
-          i = self[sl.instr.to_s]
+          i = self[sl.instr.to_i.to_s]
           i.render(sl, os) if i
         end
       end
