@@ -1,5 +1,4 @@
 require "bundler/gem_tasks"
-require 'rdoc/task'
 
 begin
   require 'byebug'
@@ -10,9 +9,9 @@ rescue LoadError
   # no rspec available
 end
 
-desc 'build the rdoc documentation'
-task :doc do
-    puts %x'rdoc --main=README.md --exclude spec --exclude public' 
-end
-
 task :default => :test
+
+#
+# Load all other rake tasks that reside in lib/tasks
+#
+Dir.glob(File.expand_path(File.join('..', 'lib', 'tasks', '**', '*.rake'), __FILE__)).each { |f| load f }
