@@ -7,6 +7,7 @@ else
 end
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'csgraph'
+require 'tmpdir'
 require 'byebug'
 
 SPEC_FIXTURE_PATH = File.expand_path(File.join('..', 'fixtures'), __FILE__)

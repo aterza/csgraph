@@ -26,13 +26,13 @@ module Csgraph
         xend_val = self.xend.value(sl)
         ystart_val = self.ystart.value(sl)
         yend_val = self.yend.value(sl)
-				#
-				# TODO: handle options
-				#
-				# and finally we render
-				#
-				os.puts("line from #{xstart_val},#{ystart_val} to #{xend_val},#{yend_val}")
-				os
+        #
+        # TODO: handle options
+        #
+        # and finally we render
+        #
+        os.puts("line from #{xstart_val},#{ystart_val} to #{xend_val},#{yend_val}")
+        os
       end
 
     end

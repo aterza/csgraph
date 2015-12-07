@@ -2,7 +2,6 @@
 #
 #
 require 'optparse'
-require 'byebug'
 
 module Csgraph
 
@@ -12,12 +11,12 @@ module Csgraph
 
       include Csgraph::DSL::Reader
 
-			#
-			# <tt>execute(arguments=[], ostream = STDOUT)
-			#
-			# +execute+ does actually parse options and produces the output
-			#
-      def execute(arguments=[], ostream = STDOUT)
+      #
+      # <tt>execute(arguments=[])
+      #
+      # +execute+ does actually parse options and produces the output
+      #
+      def execute(arguments=[])
   
         options = {
           :csg              => Csgraph::DSL::DEFAULT_CSG_FILE,
@@ -39,7 +38,7 @@ module Csgraph
                   "Default: #{Csgraph::DSL::DEFAULT_CSG_FILE}") { |arg| options[:csg] = arg }
           opts.on("-o", "--output FILE", String,
                   "write to output file FILE",
-                  "Default: STDOUT") { |arg| options[:output] = arg }
+                  "Default: STDOUT") { |arg| options[:output] = File.open(arg, 'w') }
           opts.on("-h", "--help",
                   "Show this help message.") { options[:output].puts opts; exit }
           opts.parse!(arguments)
@@ -51,6 +50,11 @@ module Csgraph
           sf = Csgraph::Csound::ScoreFile.new(csd)
           sf.lines.each { |sl| defs.render(sl, options[:output]) }
         end
+
+        #
+        # return the open output stream
+        #
+        options[:output] 
   
       end
 
