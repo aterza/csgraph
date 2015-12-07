@@ -71,6 +71,26 @@ module Csgraph
         end
       end
 
+      #
+      # <tt>header(output_stream)</tt>
+      #
+      # +header+ emits the needed header lines to build the final +pic+ file
+      #
+      def header(output_stream)
+        head_path = File.expand_path(File.join(['..'] * 4, 'share', 'pic', 'header.pic'), __FILE__)
+        output_stream.puts(".PS\ncopy \"#{head_path}\"")
+      end
+
+      #
+      # <tt>trailer(output_stream)</tt>
+      #
+      # +trailer+ emits the needed trailer lines to build the final +pic+ file
+      #
+      def trailer(output_stream)
+        trail_path = File.expand_path(File.join(['..'] * 4, 'share', 'pic', 'trailer.pic'), __FILE__)
+        output_stream.puts("copy \"#{trail_path}\"\n.PE")
+      end
+
     private
 
       def read(f)

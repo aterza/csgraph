@@ -44,17 +44,20 @@ module Csgraph
           opts.parse!(arguments)
         end
   
+        outstream = options[:output]
         defs = csg_require(options[:csg])
+        defs.header(outstream)
         arguments.each do
           |csd|
           sf = Csgraph::Csound::ScoreFile.new(csd)
-          sf.lines.each { |sl| defs.render(sl, options[:output]) }
+          sf.lines.each { |sl| defs.render(sl, outstream) }
         end
+        defs.trailer(outstream)
 
         #
         # return the open output stream
         #
-        options[:output] 
+        outstream
   
       end
 

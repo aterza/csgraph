@@ -31,7 +31,7 @@ module Csgraph
         #
         # and finally we render
         #
-        os.puts("line from #{xstart_val},#{ystart_val} to #{xend_val},#{yend_val}")
+        os.puts("line from Frame.sw+(#{xstart_val}*hrange,#{ystart_val}*vrange) to Frame.sw+(#{xend_val}*hrange,#{yend_val}*vrange)")
         os
       end
 

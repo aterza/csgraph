@@ -1,0 +1,39 @@
+.PS
+#
+# This is the header for the pic file.
+# You may further customize it to your wishes, provided you know what you are
+# doing.
+# It should be included like so:
+#
+# copy "/path/to/your/header/header.pic"
+#
+# in your pic file.
+#
+# Inside your pic file, you then have access to a frame box called "Frame"
+# and you can make your drawings relative to the frame.
+#
+scale = 2.54
+Frame: box ht 18 wid 24
+vmax=  5000
+hmax=  40
+vstep= vmax/10
+hstep= hmax/10
+toffset= 0.1
+vrange = Frame.height/vmax
+hrange = Frame.width/hmax
+ticklen = 0.1 
+define vtick {
+  line from Frame.sw+(0.0,$1*vrange) to Frame.sw+(-ticklen,$1*vrange) 
+  sprintf("%.0f",$1) rjust at last line.w + (-toffset,0)  
+}
+define htick {
+  line from Frame.sw +($1*hrange,0) to Frame.sw+($1*hrange,-ticklen) 
+  sprintf("%.0f",$1) at last line.s + (0,-3*toffset)
+}
+for i = 0 to vmax by vstep do {
+  vtick(i)
+}
+for i = 0 to hmax by hstep do {
+  htick(i)
+}
+.PE

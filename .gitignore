@@ -39,5 +39,6 @@ Gemfile.lock
 # we don't want to save the codeclimate repo token
 #
 .CCRT
+.unCCRT
 .DS_Store
 *~

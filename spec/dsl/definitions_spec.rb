@@ -113,4 +113,22 @@ describe Csgraph::DSL::Definitions do
     end
   end
 
+  it 'should be able to produce headers and trailers' do
+    path = File.join(SPEC_CSG_FIXTURE_PATH, 'simple_1')
+    expect((out = StringIO.new).class).to be(StringIO)
+    expect((csg_defs = csg_require(path)).class).to be(Csgraph::DSL::Definitions)
+    #
+    # header
+    #
+    expect((out = StringIO.new).class).to be(StringIO)
+    expect(csg_defs.header(out)).to be(nil)
+    expect(out.size).to be > 0
+    #
+    # trailer
+    #
+    expect((out = StringIO.new).class).to be(StringIO)
+    expect(csg_defs.trailer(out)).to be(nil)
+    expect(out.size).to be > 0
+  end
+
 end

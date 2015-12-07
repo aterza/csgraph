@@ -6,6 +6,7 @@ describe Csgraph::DSL::Line do
 
   before(:example) do
     @slt = ' i1 0.25 0.5 -18 235.25  ; comment'
+    @slt_result = 'line from Frame.sw+(0.25*hrange,235.25*vrange) to Frame.sw+(0.75*hrange,235.25*vrange)'
     expect((@sl = Csgraph::Csound::ScoreLine.compile(@slt)).class).to be(Csgraph::Csound::IScoreLine)
   end
 
@@ -18,7 +19,7 @@ describe Csgraph::DSL::Line do
 		out = l.render(@sl, StringIO.new)
 		expect(out.size).to be > 0
 		out.rewind
-		expect(out.string.chomp).to eq('line from 0.25,235.25 to 0.75,235.25')
+		expect(out.string.chomp).to eq(@slt_result)
 	end
 
 end
