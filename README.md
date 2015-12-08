@@ -51,7 +51,7 @@ csgraph -f example.csg simple.sco | groff -p -P-l -rN2 | ps2pdf - example.pdf
 
 `example.pdf` will be something like:
 
-[![example.pdf](https://raw.githubusercontent.com/nicb/csgraph/master/share/examples/example_graph_1.png)
+![example.pdf](https://raw.githubusercontent.com/nicb/csgraph/master/share/examples/example_graph_1.png)
 
 This is a work in progress.
 Please come back often for more info.
