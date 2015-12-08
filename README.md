@@ -25,10 +25,36 @@ Or install it yourself as:
 
 ## Usage
 
+Once installed, you can use `csgraph` as specified below.
+
+If you have a `example.csg` file like so:
+
+```
+instr 1 do
+    line p2, p2+p3, p5, p5
+end
+```
+
+and a `simple.sco` file like so:
+
+```csound
+i1 3.2 3 -8 600
+i1 0 3 -8 500
+i1 6.4 3 -8 700
+```
+
+then you can write on your terminal:
+
+```
+csgraph -f example.csg simple.sco | groff -p -P-l -rN2 | ps2pdf - example.pdf
+```
+
+`example.pdf` will be something like:
+
+[![example.pdf](https://raw.githubusercontent.com/nicb/csgraph/master/share/examples/example_graph_1.png)
+
 This is a work in progress.
-Currently we're working very hard to make this little lib with at least
-minimally functional.
-Please come back soon for more info.
+Please come back often for more info.
 If you wish to help, check us out on
 [Gitter!](https://gitter.im/nicb/csgraph?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 You will be most welcome.
