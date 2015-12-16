@@ -27,7 +27,7 @@ Or install it yourself as:
 
 Once installed, you can use `csgraph` as specified below.
 
-If you have a `example.csg` file like so:
+If you have a `simple.csg` file like so:
 
 ```
 instr 1 do
@@ -46,12 +46,12 @@ i1 6.4 3 -8 700
 then you can write on your terminal:
 
 ```
-csgraph -f example.csg simple.sco | groff -p -P-l -rN2 | ps2pdf - example.pdf
+csgraph -f simple.csg simple.sco | groff -p -P-l -rN2 | ps2pdf - simple.pdf
 ```
 
-`example.pdf` will be something like:
+`simple.pdf` will be something like:
 
-![example.pdf](https://raw.githubusercontent.com/nicb/csgraph/master/share/examples/example_graph_1.png)
+![simple.pdf](share/examples/simple/simple.png)
 
 This is a work in progress.
 Please come back often for more info.
