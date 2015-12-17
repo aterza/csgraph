@@ -10,8 +10,8 @@ class Hash
   # returns a copy of the hash with all keys normalized to strings
   #
   def stringify_keys
-    res = self.class.new
-    self.keys.each { |k| res[k.to_s] = self[k] }
+    res = self.dup
+    res.stringify_keys!
     res
   end
 
