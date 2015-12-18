@@ -1,0 +1,10 @@
+#
+# It defines the reading mechanism for instr 1-4
+# to read score lines in order to draw straight lines
+# with thickness propotional to amplitude
+#
+
+instr 1, 2, 3, 4 do
+  line p2, p2+p3, p5, p5, :thickness => 25+p4
+end
+

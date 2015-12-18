@@ -3,7 +3,7 @@ module Csgraph
   module DSL
 
     class Line
-    
+
       attr_reader :xstart, :xend, :ystart, :yend, :options
 
       def initialize(xs, xe, ys, ye, opts = {})
@@ -11,7 +11,7 @@ module Csgraph
         @xend = xe
         @ystart = ys
         @yend = ye
-        @options = opts
+        @options = Options.new(opts)
       end
 
       #
@@ -27,14 +27,30 @@ module Csgraph
         ystart_val = self.ystart.value(sl)
         yend_val = self.yend.value(sl)
         #
-        # TODO: handle options
-        #
         # and finally we render
         #
-        os.puts("line from Frame.sw+(#{xstart_val}*hrange,#{ystart_val}*vrange) to Frame.sw+(#{xend_val}*hrange,#{yend_val}*vrange)")
+        os.puts("line from Frame.sw+(#{xstart_val}*hrange,#{ystart_val}*vrange) to Frame.sw+(#{xend_val}*hrange,#{yend_val}*vrange) #{self.options.render(sl)}")
         os
       end
 
+    private
+
+      class Options < Csgraph::DSL::Options
+
+         ALLOWED_OPTIONS = ['thickness']
+
+         def initialize(opts)
+           super(opts, 'line', ALLOWED_OPTIONS)
+         end
+
+         def render(sl)
+           res = []
+           res << "thickness #{self['thickness'].value(sl).to_s}" if self.has_key?('thickness')
+           res.join(' ') 
+         end
+
+      end
+      
     end
 
   end

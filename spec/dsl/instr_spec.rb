@@ -4,7 +4,7 @@ describe Csgraph::DSL::Instr do
 
   before(:example) do
     @slt = ' i1 0.25 0.5 -18 235.25  ; comment'
-    @slt_result = 'line from Frame.sw+(0.25*hrange,235.25*vrange) to Frame.sw+(0.75*hrange,235.25*vrange)'
+    @slt_result = 'line from Frame.sw+(0.25*hrange,235.25*vrange) to Frame.sw+(0.75*hrange,235.25*vrange) '
     expect((@sl = Csgraph::Csound::ScoreLine.compile(@slt)).class).to be(Csgraph::Csound::IScoreLine)
   end
 
