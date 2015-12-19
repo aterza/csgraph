@@ -36,6 +36,19 @@ describe Csgraph::DSL::PFieldExpression do
     expect(pe.right.number).to eq(2)
   end
 
+  it 'should be able to chain expressions and render them' do
+    expect((sl = Csgraph::Csound::ScoreLine.compile(@sl)).class).to be(Csgraph::Csound::IScoreLine)
+    expect((p2 = Csgraph::DSL::PField.create('p2')).class).to be(Csgraph::DSL::PField)
+    expect((p3 = Csgraph::DSL::PField.create(:p3)).class).to be(Csgraph::DSL::PField)
+    expect((pe = 23 + p2 + p3).class).to be(Csgraph::DSL::PFieldExpression)  
+    expect(pe.value(sl)).to eq(23 + 0.25 + 0.5)
+    #
+    # let's play it more complicated
+    #
+    expect((pe = (23 - p2) + p3).class).to be(Csgraph::DSL::PFieldExpression)  
+    expect(pe.value(sl)).to eq((23 - 0.25) + 0.5)
+  end
+
   it 'does return the proper value' do
     expect((sl = Csgraph::Csound::ScoreLine.compile(@sl)).class).to be(Csgraph::Csound::IScoreLine)
     p2 = Csgraph::DSL::PField.create(:p2)

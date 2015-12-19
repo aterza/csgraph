@@ -7,6 +7,7 @@ end
 
 %w(
   exceptions
+  p_field_operations
   p_field
 	p_field_expression
   options

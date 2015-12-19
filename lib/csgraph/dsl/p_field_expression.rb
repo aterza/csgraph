@@ -27,6 +27,7 @@ module Csgraph
         self.send(self.operator, lval, rval)
       end
 
+      include PFieldOperations
 
     private
 
@@ -41,6 +42,8 @@ module Csgraph
           res = operand
         elsif operand.is_a?(PField)
           res = sl.params[operand.number-1] # csound parameters are 1-offset but we save them as 0-offset
+        elsif operand.is_a?(self.class)
+          res = operand.value(sl)
         end
         res
       end
