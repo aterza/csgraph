@@ -21,4 +21,9 @@ describe Csgraph::DSL::Options do
     expect { Csgraph::DSL::Options.new(@hash, 'test', less_arguments) }.to raise_error(ArgumentError)
   end
 
+  it 'is a pure virtual and should not render' do
+    expect((o = Csgraph::DSL::Options.new(@hash, 'test', @allowed)).class).to be(Csgraph::DSL::Options)
+    expect { o.render(nil) }.to raise_error(Csgraph::Exceptions::PureVirtualMethod)
+  end
+
 end
