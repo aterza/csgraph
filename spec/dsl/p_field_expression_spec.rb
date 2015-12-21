@@ -22,24 +22,40 @@ describe Csgraph::DSL::PFieldExpression do
     expect { Csgraph::DSL::PFieldExpression.new(pfield, 'xxx', :_plus_) }.to raise_error(Csgraph::DSL::Exceptions::SyntaxError)
   end
 
-  it 'should be able to add a pfield to a constant' do
+  it 'should be able to mul a pfield with a constant' do
     expect((p2 = Csgraph::DSL::PField.create('p2')).class).to be(Csgraph::DSL::PField)
-    expect((pe = p2 + 23).class).to be(Csgraph::DSL::PFieldExpression)  
+    expect((pe = p2 * 23).class).to be(Csgraph::DSL::PFieldExpression)  
     expect(pe.left.number).to eq(2)
     expect(pe.right).to eq(23)
   end
 
-  it 'should be able to add a constant to a pfield' do
+  it 'should be able to div a pfield with a constant' do
     expect((p2 = Csgraph::DSL::PField.create('p2')).class).to be(Csgraph::DSL::PField)
-    expect((pe = 23 + p2).class).to be(Csgraph::DSL::PFieldExpression)  
-    expect(pe.left).to eq(23)
-    expect(pe.right.number).to eq(2)
+    expect((pe = p2 / 23).class).to be(Csgraph::DSL::PFieldExpression)  
+    expect(pe.left.number).to eq(2)
+    expect(pe.right).to eq(23)
+  end
+
+  it 'should be able to pow a pfield with a constant' do
+    expect((p2 = Csgraph::DSL::PField.create('p2')).class).to be(Csgraph::DSL::PField)
+    expect((pe = p2 ** 3).class).to be(Csgraph::DSL::PFieldExpression)  
+    expect(pe.left.number).to eq(2)
+    expect(pe.right).to eq(3)
+  end
+
+  it 'should be able to mod a pfield with a constant' do
+    expect((p5 = Csgraph::DSL::PField.create('p5')).class).to be(Csgraph::DSL::PField)
+    expect((pe = p5 % 3).class).to be(Csgraph::DSL::PFieldExpression)  
+    expect(pe.left.number).to eq(5)
+    expect(pe.right).to eq(3)
   end
 
   it 'should be able to chain expressions and render them' do
     expect((sl = Csgraph::Csound::ScoreLine.compile(@sl)).class).to be(Csgraph::Csound::IScoreLine)
     expect((p2 = Csgraph::DSL::PField.create('p2')).class).to be(Csgraph::DSL::PField)
     expect((p3 = Csgraph::DSL::PField.create(:p3)).class).to be(Csgraph::DSL::PField)
+    expect((p5 = Csgraph::DSL::PField.create(:p5)).class).to be(Csgraph::DSL::PField)
+    #
     expect((pe = 23 + p2 + p3).class).to be(Csgraph::DSL::PFieldExpression)  
     expect(pe.value(sl)).to eq(23 + 0.25 + 0.5)
     #
@@ -47,6 +63,26 @@ describe Csgraph::DSL::PFieldExpression do
     #
     expect((pe = (23 - p2) + p3).class).to be(Csgraph::DSL::PFieldExpression)  
     expect(pe.value(sl)).to eq((23 - 0.25) + 0.5)
+    #
+    # with a mul
+    #
+    expect((pe = 23 - p2 * p3).class).to be(Csgraph::DSL::PFieldExpression)  
+    expect(pe.value(sl)).to eq(23 - 0.25 * 0.5)
+    #
+    # with a div
+    #
+    expect((pe = 23 - p2 / p3).class).to be(Csgraph::DSL::PFieldExpression)  
+    expect(pe.value(sl)).to eq(23 - 0.25 / 0.5)
+    #
+    # with a pow
+    #
+    expect((pe = 23 - p2 ** p3).class).to be(Csgraph::DSL::PFieldExpression)  
+    expect(pe.value(sl)).to eq(23 - 0.25 ** 0.5)
+    #
+    # with a mod
+    #
+    expect((pe = 23 - p5 % 3).class).to be(Csgraph::DSL::PFieldExpression)  
+    expect(pe.value(sl)).to eq(23 - 235.25 % 3)
   end
 
   it 'does return the proper value' do

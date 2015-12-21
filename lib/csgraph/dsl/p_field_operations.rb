@@ -4,14 +4,30 @@ module Csgraph
 
     module PFieldOperations
 
-      attr_reader :coming_from_coerce
-
       def +(other)
         arithmetic(other, :__plus__)
       end
 
       def -(other)
         arithmetic(other, :__minus__)
+      end
+
+      def *(other)
+        arithmetic(other, :__mul__)
+      end
+
+      def /(other)
+        arithmetic(other, :__div__)
+      end
+
+      def **(other)
+        arithmetic(other, :__pow__)
+      end
+
+      alias_method :^, :**
+
+      def %(other)
+        arithmetic(other, :__mod__)
       end
 
       #
@@ -21,7 +37,7 @@ module Csgraph
       # addition with Numeric and the like
       #
       def coerce(other)
-        @coming_from_coerce = true
+        @coerced = !other.is_a?(PFieldBase)
         [self, other]
       end
 
@@ -29,7 +45,9 @@ module Csgraph
 
       def arithmetic(other, op)
         raise Exceptions::SyntaxError, "wrong operator type #{other.class.name}" unless other.is_a?(PField) || other.is_a?(PFieldExpression) || other.is_a?(Numeric)
-        self.coming_from_coerce ? PFieldExpression.new(other, self, op) : PFieldExpression.new(self, other, op)
+        res = self.coerced? ? PFieldExpression.new(other, self, op) : PFieldExpression.new(self, other, op)
+        @coerced = false # this must be reset if we are in chained operations
+        res
       end
 
     end

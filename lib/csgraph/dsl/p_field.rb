@@ -5,12 +5,11 @@ module Csgraph
     #
     # +PField+
     #
-    class PField
+    class PField < PFieldBase
 
       attr_reader :number
 
       def initialize(n)
-        @coming_from_coerce = false
         @number = n
       end
 
@@ -32,8 +31,6 @@ module Csgraph
         end
 
       end
-
-      include PFieldOperations
 
     end
 

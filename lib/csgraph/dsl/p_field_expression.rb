@@ -5,7 +5,7 @@ module Csgraph
     #
     # +PFieldExpression+
     #
-    class PFieldExpression
+    class PFieldExpression < PFieldBase
 
       attr_reader :left, :right, :operator
 
@@ -26,8 +26,6 @@ module Csgraph
         rval = extract_value(sl, self.right)
         self.send(self.operator, lval, rval)
       end
-
-      include PFieldOperations
 
     private
 
@@ -54,6 +52,22 @@ module Csgraph
 
       def __minus__(lval, rval)
         lval - rval
+      end
+
+      def __mul__(lval, rval)
+        lval * rval
+      end
+
+      def __div__(lval, rval)
+        lval / rval
+      end
+
+      def __pow__(lval, rval)
+        lval ** rval
+      end
+
+      def __mod__(lval, rval)
+        lval % rval
       end
 
     end
