@@ -4,6 +4,8 @@ describe Csgraph::DSL::PField do
 
   before(:example) do
     @sl = ' i1 0.25 0.5 -18 235.25  ; comment'
+    @sl_with_converters_0 = 'i1 0.25 0.5 -18 8.01 ; 8.01 = 277.15554548439167'
+    @sl_with_converters_1 = 'i1 0.25 0.5 -18 8.75 ; 8.75 = 439.95700446074346'
   end
 
   it 'can be created with a p-string' do
@@ -34,5 +36,26 @@ describe Csgraph::DSL::PField do
     end
   end
 
-end
+  it 'does return the proper value with ampdb and cpspch converters' do
+    expect((sl = Csgraph::Csound::ScoreLine.compile(@sl_with_converters_0)).class).to be(Csgraph::Csound::IScoreLine)
+    p4 = Csgraph::DSL::PField.create(:p4)
+    p4.add_converter(:ampdb)
+    p5 = Csgraph::DSL::PField.create(:p5)
+    p5.add_converter(:cpspch)
+    eps = 0.000001
+    expect((p4.value(sl) - 0.12589254117941673).abs).to be < eps
+    expect((p5.value(sl) - 277.15554548439167).abs).to be < eps
+  end
 
+  it 'does return the proper value with ampdbfs and cpsoct converters' do
+    expect((sl = Csgraph::Csound::ScoreLine.compile(@sl_with_converters_1)).class).to be(Csgraph::Csound::IScoreLine)
+    p4 = Csgraph::DSL::PField.create(:p4)
+    p4.add_converter(:ampdbfs)
+    p5 = Csgraph::DSL::PField.create(:p5)
+    p5.add_converter(:cpsoct)
+    eps = 0.000001
+    expect((p4.value(sl) - 4125.246789367127).abs).to be < eps
+    expect((p5.value(sl) - 439.95700446074346).abs).to be < eps
+  end
+
+end

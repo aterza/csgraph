@@ -1,0 +1,10 @@
+#
+# this is a simple csg file with conversions
+#
+# It defines the reading mechanism for instr 1-4
+# to read score lines in order to draw straight lines
+#
+
+instr 1, 2, 3, 4 do
+  line p2, p2+p3, cpsoct(p5), cpsoct(p5), :thickness => ampdbfs(p4)/1000.0
+end

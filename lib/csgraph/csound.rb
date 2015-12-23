@@ -8,4 +8,5 @@ end
 %w(
   score_line
   score_file
+  conversions
 ).each { |f| require File.join(Csgraph::Csound::PATH, f) }

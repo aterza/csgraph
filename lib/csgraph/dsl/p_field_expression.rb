@@ -10,6 +10,7 @@ module Csgraph
       attr_reader :left, :right, :operator
 
       def initialize(l, r, o)
+        super()
         @left = check_argument(l)
         @right = check_argument(r)
         @operator = o
@@ -24,7 +25,8 @@ module Csgraph
       def value(sl)
         lval = extract_value(sl, self.left)
         rval = extract_value(sl, self.right)
-        self.send(self.operator, lval, rval)
+        res = self.send(self.operator, lval, rval)
+        self.convert(res)
       end
 
     private
@@ -46,6 +48,9 @@ module Csgraph
         res
       end
 
+      #
+      # Arithmetic operations
+      #
       def __plus__(lval, rval)
         lval + rval
       end

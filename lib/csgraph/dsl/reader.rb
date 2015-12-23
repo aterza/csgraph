@@ -14,14 +14,14 @@ module Csgraph
       #
       def csg_require(filename)
         filename += '.csg' unless filename =~ /\.csg\Z/
-				csg_def = nil
+        csg_def = nil
         begin
-					csg_def = Csgraph::DSL::Definitions.new
-					csg_def.csg_require(filename)
+          csg_def = Csgraph::DSL::Definitions.new
+          csg_def.csg_require(filename)
         rescue SyntaxError => e
           raise Csgraph::DSL::Exceptions::SyntaxError, "Csgraph DSL Syntax Error: " + e.message
         end
-				csg_def
+        csg_def
       end
 
     end

@@ -35,8 +35,8 @@ module Csgraph
 
       def csg_require(filename_path)
         clear
-				csg_string = read(filename_path)
-				self.instance_eval(csg_string)
+        csg_string = read(filename_path)
+        self.instance_eval(csg_string)
       end
       #
       # <tt>instr(*args, &block)</tt>

@@ -55,7 +55,9 @@ module Csgraph
         raise ArgumentError, "Argument can only be a p-field (got \"#{str}\" instead)" unless str =~ /\A[Pp]\s*[0-9]*/
         PField.create(methId)
       end
-        
+
+      include Csgraph::Csound::Conversions::Cached
+
     end
 
   end
