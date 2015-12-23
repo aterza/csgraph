@@ -52,20 +52,12 @@ module Csgraph
 
       module Cached
 
-        def ampdb(val)
-          common_converter(:ampdb, val)
-        end
-
-        def ampdbfs(val)
-          common_converter(:ampdbfs, val)
-        end
-
-        def cpspch(val)
-          common_converter(:cpspch, val)
-        end
-
-        def cpsoct(val)
-          common_converter(:cpsoct, val)
+        Csgraph::Csound::Conversions::Actual.public_instance_methods.each do
+          |meth|
+          define_method(meth) do
+            |val|
+            common_converter(meth, val)
+          end
         end
 
       private
@@ -78,7 +70,6 @@ module Csgraph
             val.add_converter(meth)
             res = val
           else
-            # meth = ('Csgraph::Csound::Conversions::Actual.' + conv.to_s).to_sym
             extend Csgraph::Csound::Conversions::Actual
             res = send(conv, val)
           end
